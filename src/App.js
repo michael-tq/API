@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import ResultComponent from './ResultComponent';
 
 class App extends Component {
   constructor(props) {
@@ -9,8 +10,7 @@ class App extends Component {
       data: this.data,
       loading: true,
       freeFilter: false,
-      moreInfo: false,
-      noInfo: true
+      moreInfo: false
     }
   }
   
@@ -51,14 +51,15 @@ class App extends Component {
           ) : (
             <div>
               <ul>
-                {this.state.data.items.map(el => {
-                  return (
-                    <div key={el.id}>
-                    <li>{el.volumeInfo.title}</li>
-                    <label>Would you like a page count?</label>
-                    <input type="checkbox" onChange={(e) => this.setState({moreInfo: !this.state.moreInfo, noInfo: !this.state.noInfo})} /> 
-                    {this.state.moreInfo ? (<div>{el.volumeInfo.pageCount} pages </div>) : (<div></div>) }
-                    </div> )
+                {this.state.data.items.map((el, id) => {
+                  return  <ResultComponent result={el} id={id} />
+                  // return (                 
+                  //   <div key={el.id}>
+                  //   <li>{el.volumeInfo.title}</li>
+                  //   <label>Would you like a page count?</label>
+                  //   <input type="checkbox" onChange={(e) => this.setState({moreInfo: !this.state.moreInfo})} /> 
+                  //   {this.state.moreInfo ? (<div>{el.volumeInfo.pageCount} pages </div>) : (<div></div>) }
+                  //   </div> )
                 })
                 }
               </ul>
