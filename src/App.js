@@ -47,17 +47,17 @@ class App extends Component {
         </form>
         <div>
           {this.state.loading || !this.state.data ? (
-            <div><p>loading</p></div>
+            <div></div>
           ) : (
             <div>
               <ul>
                 {this.state.data.items.map(el => {
                   return (
-                    <div>
-                    <li key={el.id}>{el.volumeInfo.title}</li>
+                    <div key={el.id}>
+                    <li>{el.volumeInfo.title}</li>
                     <label>Would you like a page count?</label>
                     <input type="checkbox" onChange={(e) => this.setState({moreInfo: !this.state.moreInfo, noInfo: !this.state.noInfo})} /> 
-                  {this.state.noInfo || this.state.moreInfo ? (<div></div>) : (<p>{el.volumeInfo.pageCount} pages </p>) }
+                    {this.state.moreInfo ? (<div>{el.volumeInfo.pageCount} pages </div>) : (<div></div>) }
                     </div> )
                 })
                 }
